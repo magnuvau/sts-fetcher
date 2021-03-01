@@ -4,6 +4,7 @@ from requests.auth import HTTPBasicAuth
 import argparse
 import requests
 import json
+import os
 
 hostnames = {}
 creds = {}
@@ -59,5 +60,9 @@ headers = {
 }
 
 request = requests.post(url, headers=headers, auth=HTTPBasicAuth(USERNAME, PASSWORD))
-print(request.content)
+#print(request.content)
+
+access_token = json.loads(request.text)['access_token']
+
+os.system("echo %s | clip.exe" % access_token)
 
