@@ -5,6 +5,9 @@ import argparse
 import requests
 import json
 import os
+import requests.packages.urllib3
+
+requests.packages.urllib3.disable_warnings()
 
 hostnames = {}
 creds = {}
@@ -59,7 +62,7 @@ headers = {
     "Accept": "application/json"
 }
 
-request = requests.post(url, headers=headers, auth=HTTPBasicAuth(USERNAME, PASSWORD))
+request = requests.post(url, headers=headers, auth=HTTPBasicAuth(USERNAME, PASSWORD), verify=False)
 #print(request.content)
 
 access_token = json.loads(request.text)['access_token']
